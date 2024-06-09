@@ -1,0 +1,7 @@
+name: "Migration Process Test"
+type: module
+description: "Testing custom migration process plugins."
+package: Migration
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:migrate

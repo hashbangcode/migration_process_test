@@ -1,0 +1,32 @@
+id: migration_process_test
+label: Testing custom migration process plugins
+
+source:
+  plugin: embedded_data
+  data_rows:
+    - data_id: 1
+      data_title: '<p>About us page</p>'
+      data_content: '<p>The about us page content.<span></span></p>'
+    - data_id: 2
+      data_title: '<p>contact Us page</p>'
+      data_content: '<p> </p><p>Contact us via the address example@example.com.</p>'
+  ids:
+    data_id:
+      type: integer
+
+process:
+  # Title field.
+  title:
+    - plugin: reformat_title
+      source: data_title
+  # Body field.
+  body/0/value:
+    - plugin: fix_data_content
+      source: data_content
+  body/0/format:
+    plugin: default_value
+    default_value: "basic_html"
+
+destination:
+  plugin: entity:node
+  default_bundle: page
